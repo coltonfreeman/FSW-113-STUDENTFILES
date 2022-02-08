@@ -11,7 +11,15 @@ const movies = [
     { name: 'Frozen II', year: 2019, gross: 1450026933 }
 ]
 
-const movies2B = movies.filter(function(item) {
+
+let top10Moives = '<ol>'
+ movies.forEach (function () {
+     top10Moives += '<li> ${movie.names} (${movie.year}) : $$ {movie.gross.toLocalString()} </li>'
+ });
+  top10Moives += '</ol>'
+  document.querySelector('#top10Movies').innerHTML = top10Moives
+
+const movies2B = movies.filter(function(movie) {
     return item.gross >= 2000000000
 })
 
