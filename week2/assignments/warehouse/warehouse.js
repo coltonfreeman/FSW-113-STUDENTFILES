@@ -24,33 +24,32 @@ const parts = [
 
 // list of each part number and qty for check-off in the "detailsList" element
 let partList = document.querySelector("#detailsList");
-parts.forEach(function(element, index) {
+parts.forEach(function(parts) {
     let needPart = document.createElement("div");
     let newPart = document.createElement("input");
     newPart.setAttribute("type", "checkbox");
     let partLabel = document.createElement("label");
-    partLabel.textContent = `${parts[index].qty} (${parts[index].partNbr}) - ${parts[index].partDescr}`;
+    partLabel.textContent = `${parts.qty} (${parts.partNbr}) - ${parts.partDescr}`;
     partList.appendChild(needPart);
     needPart.appendChild(newPart);
     needPart.appendChild(partLabel);
 });
 
-
 // if parts requiring special handling exist (in aisle B3), list of items needing 
 // special packaging in the "specialPackaging" element, else remove element
 let specialPackaging = document.querySelector("#specialPackaging");
-let specialHandling = parts.filter(function(element, index) {
-    return parts[index].aisle === "B3";
-});
+let specialHandling = parts.filter(function (parts) {
+        return parts.aisle === "B3";
+    });
 
 if (specialHandling.length !== 0) {
-    specialHandling.forEach(function(element, index) {
-        let revisedHandling = document.createElement("p");
-        revisedHandling.textContent = `Item: ${specialHandling[index].partNbr} / Qty: ${specialHandling[index].qty}`;
-        specialPackaging.appendChild(revisedHandling);
-        specialPackaging.style.height = "max-content";
+    specialHandling.forEach((_element) => {
+            let revisedHandling = document.createElement("p");
+            revisedHandling.textContent = `Item: ${specialHandling.partNbr} / Qty: ${specialHandling.qty}`;
+            specialPackaging.appendChild(revisedHandling);
+            specialPackaging.style.height = "max-content";
 
-    })
+        })
 } else {
     specialPackaging.remove();
 }
@@ -58,11 +57,10 @@ if (specialHandling.length !== 0) {
 // if hazardous parts exist (in aisle J4), let employee know in the "hazardousMaterials"
 // element and remind them to get gloves, else remove element
 let hazardousParts = document.querySelector("#hazardousMaterials");
-let hazardous = parts.some(function(element, index) {
-    return parts[index].aisle === "J4";
-})
+let hazardous = parts.some((_element) =>  _element.aisle === "J4")
 
-if (hazardous !== true) {
+
+if (!hazardous) {
     hazardousParts.remove();
 } else {
     let hazardNote = document.createElement("p");
@@ -74,10 +72,10 @@ if (hazardous !== true) {
 // if all items in the order are small parts (aisle H1), then let employee know that they should take 
 // a basket and go dirctly to aisle H1
 let smallParts = document.querySelector("#smallItemsOnly");
-let smallItems = parts.every(function(element, index) {
-    return parts[index].aisle === "H1";
+let smallItems = parts.every(function(_element) {
+    return parts.aisle === "H1";
 })
-if (smallItems !== true) {
+if (!smallItems) {
     smallParts.remove();
 } else {
     let smallPartsInfo = document.createElement("p");
@@ -90,9 +88,7 @@ if (smallItems !== true) {
 
 
 let forkLiftNeeded = document.querySelector("#forkLiftNeeded");
-let largeParts = parts.find(function(element, index) {
-    return parts[index].aisle === "S" || parts[index].aisle === "T" || parts[index].aisle === "U";
-})
+let largeParts = parts.find((_element) => parts.aisle === "S" || parts.aisle === "T" || parts.aisle === "U")
 if (largeParts === undefined) {
     forkLiftNeeded.remove();
 } else {
