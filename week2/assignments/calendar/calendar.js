@@ -16,11 +16,11 @@ let months = [
 // you can use either a for loop or an array.map to populate the select. remember that while arrays start with 
 // zero, month numbers go from 1-12
 let select = document.querySelector("#months");
-months.map(function(month) {
-    let counter = 0;
-    select.innerHTML += `<option value="${counter}">${month}</option`;
-    counter++;
-});
+months.map(function(month,index) {
+    return `<option value= "${index}">${month}</option`;
+}).forEach(function(option){   
+    select.innerHTML += option
+})
 // modify this script to run a function called printCalendar() when the user clicks the "Go" button
 // modify this script to use the first day of the month the user selects in place of the const today 
 document.querySelector("#inputYear").value = new Date().getFullYear();
@@ -29,7 +29,7 @@ document.querySelector("#goButton").addEventListener("click", function printCale
     let input = document.querySelector("#inputYear");
 
 
-    const today = new Date(input.value, select.selectedIndex, 1);
+    const today = (input.value, select.value, 1)
     const month = today.getMonth()
     let days
     switch (month) {
