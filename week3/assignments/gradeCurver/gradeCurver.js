@@ -1,8 +1,16 @@
 // declare each of the variables marked with "**" in the appropriate scope and using the appropriate type
 
 // create an event listener that calls the curveGrade() function when the Curve It!! button is clicked
+let curveItBtn = document.querySelector("#submit");
+curveItBtn.addEventListener("click", curveGrades);
 
 // create an event listener that resets the scores and grades to their defaults when the Reset button is clicked
+let scores = document.querySelector("#scores");
+let grades = document.querySelector("#grades");
+document.querySelector("#reset").addEventListener("click", () => {
+    scores.value = "";
+    grades.innerHTML = "Curved Grades Show Here";
+});
 
 function applyBell(grade, index, ary) {
     switch (true) {
@@ -38,31 +46,20 @@ function convertArray(obj) {
 // empty lines, can you get the number of lines down to 8?
 
 function curveGrades() {
-    **sum = function (accumulator, currentValue) {
-        return accumulator + currentValue
-    }
+    let sumGrades = array => (array.reduce((accumulator, currentValue) => (accumulator + currentValue)));
 
-    **sumGrades = function(array) {
-        return array.reduce(sum)
-    }
+    let aryGrades = convertArray(document.querySelector("#scores"));
 
-    **aryGrades = convertArray(document.querySelector('#scores'))
+    let minGrade = aryGrades.reduce((a, b) => (Math.min(a, b)));
 
-    **minGrade = aryGrades.reduce(function(a, b) {
-        return Math.min(a, b)
-    })
-    
-    **maxGrade = aryGrades.reduce(function(a, b) {
-        return Math.max(a, b)
-    })
-    
-    **mean = sumGrades(aryGrades) / aryGrades.length
+    let maxGrade = aryGrades.reduce((a, b) => (Math.max(a, b)));
 
-    **range = maxGrade - minGrade
+    mean = sumGrades(aryGrades) / aryGrades.length;
 
-    gradeSlice = range / 5
+    gradeSlice = (maxGrade - minGrade) / 5;
 
-    aryGrades.forEach(applyBell)
+    aryGrades.forEach(applyBell);
 
     // write the value of aryGrades to the grades div in the HTML document
-}
+    grades.innerText = aryGrades.join();
+};

@@ -24,7 +24,7 @@ const parts = [
 
 // list of each part number and qty for check-off in the "detailsList" element
 let partList = document.querySelector("#detailsList");
-parts.forEach(function(_element, index) {
+parts.forEach(function(element, index) {
     let needPart = document.createElement("div");
     let newPart = document.createElement("input");
     newPart.setAttribute("type", "checkbox");
@@ -39,12 +39,12 @@ parts.forEach(function(_element, index) {
 // if parts requiring special handling exist (in aisle B3), list of items needing 
 // special packaging in the "specialPackaging" element, else remove element
 let specialPackaging = document.querySelector("#specialPackaging");
-let specialHandling = parts.filter(function(_element, index) {
+let specialHandling = parts.filter(function(element, index) {
     return parts[index].aisle === "B3";
 });
 
 if (specialHandling.length !== 0) {
-    specialHandling.forEach(function(_element, index) {8
+    specialHandling.forEach(function(element, index) {
         let revisedHandling = document.createElement("p");
         revisedHandling.textContent = `Item: ${specialHandling[index].partNbr} / Qty: ${specialHandling[index].qty}`;
         specialPackaging.appendChild(revisedHandling);
@@ -58,7 +58,9 @@ if (specialHandling.length !== 0) {
 // if hazardous parts exist (in aisle J4), let employee know in the "hazardousMaterials"
 // element and remind them to get gloves, else remove element
 let hazardousParts = document.querySelector("#hazardousMaterials");
-let hazardous = parts.some((_element, index) => parts[index].aisle === "J4")
+let hazardous = parts.some(function(element, index) {
+    return parts[index].aisle === "J4";
+})
 
 if (hazardous !== true) {
     hazardousParts.remove();
@@ -72,7 +74,7 @@ if (hazardous !== true) {
 // if all items in the order are small parts (aisle H1), then let employee know that they should take 
 // a basket and go dirctly to aisle H1
 let smallParts = document.querySelector("#smallItemsOnly");
-let smallItems = parts.every(function(_element, index) {
+let smallItems = parts.every(function(element, index) {
     return parts[index].aisle === "H1";
 })
 if (smallItems !== true) {
@@ -88,9 +90,9 @@ if (smallItems !== true) {
 
 
 let forkLiftNeeded = document.querySelector("#forkLiftNeeded");
-let largeParts = parts.find(function (_element, index) {
-        return parts[index].aisle === "S" || parts[index].aisle === "T" || parts[index].aisle === "U";
-    })
+let largeParts = parts.find(function(element, index) {
+    return parts[index].aisle === "S" || parts[index].aisle === "T" || parts[index].aisle === "U";
+})
 if (largeParts === undefined) {
     forkLiftNeeded.remove();
 } else {
