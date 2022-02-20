@@ -24,12 +24,12 @@ const parts = [
 
 // list of each part number and qty for check-off in the "detailsList" element
 let partList = document.querySelector("#detailsList");
-parts.forEach(function(parts) {
+parts.forEach(function(part) {
     let needPart = document.createElement("div");
     let newPart = document.createElement("input");
     newPart.setAttribute("type", "checkbox");
     let partLabel = document.createElement("label");
-    partLabel.textContent = `${parts.qty} (${parts.partNbr}) - ${parts.partDescr}`;
+    partLabel.textContent = `${part.qty} (${part.partNbr}) - ${part.partDescr}`;
     partList.appendChild(needPart);
     needPart.appendChild(newPart);
     needPart.appendChild(partLabel);
@@ -43,9 +43,9 @@ let specialHandling = parts.filter(function (parts) {
     });
 
 if (specialHandling.length !== 0) {
-    specialHandling.forEach((_element) => {
+    specialHandling.forEach((part) => {
             let revisedHandling = document.createElement("p");
-            revisedHandling.textContent = `Item: ${specialHandling.partNbr} / Qty: ${specialHandling.qty}`;
+            revisedHandling.textContent = `Item: ${part.partNbr} / Qty: ${part.qty}`;
             specialPackaging.appendChild(revisedHandling);
             specialPackaging.style.height = "max-content";
 

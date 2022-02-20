@@ -1,11 +1,10 @@
 // declare any necessary variables
-// define a function called 'fetchData()' that passes the values from 
-// the 'queryType' and 'itemID' elements in starwars.html to the function 
-// called 'getFromSWAPI()'
 let queryType;
 let itemID;
 
-
+// define a function called 'fetchData()' that passes the values from 
+// the 'queryType' and 'itemID' elements in starwars.html to the function 
+// called 'getFromSWAPI()'
 
 
 function fetchData() {
