@@ -31,7 +31,7 @@ document.querySelector("#reset").addEventListener("click", () => {
 function instantiateStudent() {
     let studentScoresArr = toNumArray(studentScores.value);
     let possibleScoresArr = toNumArray(possibleScores.value);
-    student = new student(studentName.value, className.value, studentScoresArr, possibleScoresArr);
+    student = new Student(studentName.value, className.value, studentScoresArr, possibleScoresArr);
     fillCertificate(student);
 }
 // Create a function that fills in the student's name, class name, and calculated grade on the certificate .
